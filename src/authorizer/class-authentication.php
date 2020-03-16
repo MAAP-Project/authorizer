@@ -424,7 +424,7 @@ class Authentication extends Static_Instance {
 		}
 
 		// Set the CAS client configuration.
-		\phpCAS::client( $cas_version, $auth_settings['cas_host'], intval( $auth_settings['cas_port'] ), $auth_settings['cas_path'] );
+		\phpCAS::proxy( CAS_VERSION_3_0, $auth_settings['cas_host'], intval( $auth_settings['cas_port'] ), $auth_settings['cas_path'] );
 
 		// Allow redirects at the CAS server endpoint (e.g., allow connections
 		// at an old CAS URL that redirects to a newer CAS URL).
@@ -474,6 +474,10 @@ class Authentication extends Static_Instance {
 
 		// Retrieve the user attributes (e.g., email address, first name, last name) from the CAS server.
 		$cas_attributes = \phpCAS::getAttributes();
+
+		$_SESSION['maap-profile'] = $cas_attributes;// $user_data['cas_attributes']; 
+		$_SESSION['maap-profile-proxyGrantingTicket'] = $cas_attributes['proxyGrantingTicket'];
+
 
 		// Get user email if it is specified in another field.
 		if ( array_key_exists( 'cas_attr_email', $auth_settings ) && strlen( $auth_settings['cas_attr_email'] ) > 0 ) {

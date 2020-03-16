@@ -1,6 +1,10 @@
 # Authorizer
 
-* WordPress Plugin: [https://wordpress.org/plugins/authorizer/][wp]
+## MAAP Developer Notes
+
+This WordPress plugin is forked from [https://wordpress.org/plugins/authorizer/][authorizer], modified to use a CAS proxy login instead direct authentication. Also included in this project is a custom [maapprofile.php][MAAP profile view] that references a CAS proxy granting ticket. To use this custom view, add it in the folder of a WordPress theme, and then create a new WordPress page that references the template.
+
+* WordPress Plugin: 
 * Changelog: [https://github.com/uhm-coe/authorizer/blob/master/readme.txt][changelog]
 
 *Authorizer* is a WordPress plugin that restricts access to specific users, typically students enrolled in a university course. It maintains a list of approved users that you can edit to determine who has access. It also replaces the default WordPress login/authorization system with one relying on an external server, such as Google, CAS, or LDAP. Finally, *Authorizer* lets you limit invalid login attempts to prevent bots from compromising your users' accounts.
