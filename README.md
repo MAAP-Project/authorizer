@@ -2,7 +2,7 @@
 
 ## MAAP Developer Notes
 
-This WordPress plugin is forked from [authorizer](https://wordpress.org/plugins/authorizer/), modified to use a CAS proxy login instead direct authentication. Also included in this project is a custom [MAAP profile view](maapprofile.php) that references a CAS proxy granting ticket. To use this custom view, add it in the folder of a WordPress theme, and then create a new WordPress page that references the template.
+This WordPress plugin is forked from [authorizer](https://wordpress.org/plugins/authorizer/), modified to use a CAS proxy login instead direct authentication. Also included in this project is a custom [MAAP profile view](maapprofile.php) that references a CAS proxy granting ticket. To use this custom view, add it in the `page-templates` folder of a WordPress theme, and then create a new WordPress page that references the template.
 
 ## Plugin Description
 
