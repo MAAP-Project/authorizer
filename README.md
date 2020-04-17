@@ -4,7 +4,7 @@
 
 This WordPress plugin is forked from [authorizer](https://wordpress.org/plugins/authorizer/), modified to use a CAS proxy login instead direct authentication. Also included in this project is a custom [MAAP profile view](maapprofile.php) that references a CAS proxy granting ticket. To use this custom view, add it in the `page-templates` folder of a WordPress theme, and then create a new WordPress page that references the template.
 
-The modified authentication code relies on the use of sessions. If the Wordpress site does not have sessions configured, one tested solution is to add the folling code to the `/wp-includes/functions.php` file:
+The modified authentication code relies on the use of sessions. If the Wordpress site does not have sessions configured, one tested solution is to add the following code to the `/wp-includes/functions.php` file:
 
 ```php
 if (!session_id()) {
