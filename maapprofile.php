@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     } else {
     	curl_setopt($ch, CURLOPT_URL, $maap_api_profile);
-    	curl_setopt($ch, CURLOPT_GET, 1);
+        curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
