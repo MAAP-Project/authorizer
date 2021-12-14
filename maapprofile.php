@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div style="margin-top: 10px; font-size: 16px">
                             <i aria-hidden="true" data-hidden="true" class="fa fa-key settings-list-icon d-none d-sm-block" style="margin-right: 5px;color: #777777;"></i>
                             <?php echo $ssh_key_name . ' - created ' . $ssh_key_dt ?>   
-                            <a href="<?php echo $self_link . ' &del=1' ?>"><i aria-hidden="true" data-hidden="true" class="fa fa-trash" style="font-size: 14px; margin-left: 10px"></i></a>
+                            <a href="<?php echo $self_link . '?del=1' ?>"><i aria-hidden="true" data-hidden="true" class="fa fa-trash" style="font-size: 14px; margin-left: 10px"></i></a>
                     </div>    
 		    <?php } ?>
                     <div style="margin-top: 10px;">
