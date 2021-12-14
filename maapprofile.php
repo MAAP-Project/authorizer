@@ -16,7 +16,7 @@
 
 $proxyTicketEnc = $_SESSION['maap-profile-proxyGrantingTicket'];
 
-$fp=fopen("/var/www/html/www.maap.xyz/mp-private.key","r");
+$fp=fopen("/var/www/dit.maap-project.org/mp-private.key","r");  // Update during deployment
 $private_maap_portal_key=fread($fp,8192);
 fclose($fp);
 
@@ -24,7 +24,7 @@ $res = openssl_get_privatekey($private_maap_portal_key);
 
 openssl_private_decrypt(base64_decode($proxyTicketEnc), $proxyTicketDec, $res);
 
-$maap_api = 'api.maap.xyz';
+$maap_api = 'api.dit.maap-project.org'; // Update during deployment
 $maap_api_profile = 'https://'. $maap_api . '/api/members/self';
 $maap_api_sshKey = $maap_api_profile . '/sshKey';
 
