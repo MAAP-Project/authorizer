@@ -18,6 +18,17 @@ if (!session_id()) {
 }
 ```
 
+## Plugin Deployment
+
+To bundle the plugin for deployment to our WordPress instance, and if you are on an unix based machine, run the following command to create a ZIP file that can be used to install the plugin. This command reads the list of files specified in `authorizer.lst` and creates a ZIP file named `authorizer.zip`. The `-r` option ensures that the contents of folders specified in the `authorizer.lst` file are included in the ZIP.
+
+```
+zip -r authorizer.zip -x \*.DS_Store -@ < authorizer.lst
+```
+
+If you need to manually create the ZIP file, refer to the `authorizer.lst` file to know which files and folders should be compressed.
+
+
 ## Plugin Description
 
 * Original WordPress Plugin: [authorizer](https://wordpress.org/plugins/authorizer/)
