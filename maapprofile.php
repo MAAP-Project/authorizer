@@ -15,14 +15,7 @@
 <?php
 
 $proxyTicketEnc = $_SESSION['maap-profile-proxyGrantingTicket'];
-
-$fp=fopen("/var/www/dit.maap-project.org/mp-private.key","r");  // Update during deployment
-$private_maap_portal_key=fread($fp,8192);
-fclose($fp);
-
-$res = openssl_get_privatekey($private_maap_portal_key);
-
-openssl_private_decrypt(base64_decode($proxyTicketEnc), $proxyTicketDec, $res);
+$proxyTicketDec = $_SESSION['phpCAS']['pgt'];
 
 $maap_api = 'api.dit.maap-project.org'; // Update during deployment
 $maap_api_profile = 'https://'. $maap_api . '/api/members/self';
@@ -40,13 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $key_file = curl_file_create(realpath($_FILES['file_upl']['tmp_name']), $_FILES['file_upl']['type'], $_FILES['file_upl']['name']);
 
+    $headers = array(
+        'proxy-ticket:' . $proxyTicketDec
+    );
     $data = array('file' => $key_file);             
     curl_setopt($ch, CURLOPT_URL, $maap_api_sshKey);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'proxy-ticket:' . $proxyTicketDec
-    ));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
     $result = curl_exec($ch);
@@ -69,9 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'proxy-ticket:' . $proxyTicketDec
-    ));
+    
+    $headers = array(
+        'proxy-ticket:' . $proxyTicketEnc,
+    );
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $result = curl_exec($ch);
 
