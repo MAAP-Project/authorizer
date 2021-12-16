@@ -15,16 +15,9 @@
 <?php
 
 $proxyTicketEnc = $_SESSION['maap-profile-proxyGrantingTicket'];
+$proxyTicketDec = $_SESSION['phpCAS']['pgt'];
 
-$fp=fopen("/var/www/html/www.maap.xyz/mp-private.key","r");
-$private_maap_portal_key=fread($fp,8192);
-fclose($fp);
-
-$res = openssl_get_privatekey($private_maap_portal_key);
-
-openssl_private_decrypt(base64_decode($proxyTicketEnc), $proxyTicketDec, $res);
-
-$maap_api = 'api.maap.xyz';
+$maap_api = 'api.dit.maap-project.org'; // Update during deployment
 $maap_api_profile = 'https://'. $maap_api . '/api/members/self';
 $maap_api_sshKey = $maap_api_profile . '/sshKey';
 
@@ -40,13 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $key_file = curl_file_create(realpath($_FILES['file_upl']['tmp_name']), $_FILES['file_upl']['type'], $_FILES['file_upl']['name']);
 
+    $headers = array(
+        'proxy-ticket:' . $proxyTicketDec
+    );
     $data = array('file' => $key_file);             
     curl_setopt($ch, CURLOPT_URL, $maap_api_sshKey);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'proxy-ticket:' . $proxyTicketDec
-    ));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
     $result = curl_exec($ch);
@@ -65,13 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     } else {
     	curl_setopt($ch, CURLOPT_URL, $maap_api_profile);
-    	curl_setopt($ch, CURLOPT_GET, 1);
+        curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
     }
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'proxy-ticket:' . $proxyTicketDec
-    ));
+    
+    $headers = array(
+        'proxy-ticket:' . $proxyTicketEnc,
+    );
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $result = curl_exec($ch);
 
@@ -141,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div style="margin-top: 10px; font-size: 16px">
                             <i aria-hidden="true" data-hidden="true" class="fa fa-key settings-list-icon d-none d-sm-block" style="margin-right: 5px;color: #777777;"></i>
                             <?php echo $ssh_key_name . ' - created ' . $ssh_key_dt ?>   
-                            <a href="<?php echo $self_link . ' &del=1' ?>"><i aria-hidden="true" data-hidden="true" class="fa fa-trash" style="font-size: 14px; margin-left: 10px"></i></a>
+                            <a href="<?php echo $self_link . '?del=1' ?>"><i aria-hidden="true" data-hidden="true" class="fa fa-trash" style="font-size: 14px; margin-left: 10px"></i></a>
                     </div>    
 		    <?php } ?>
                     <div style="margin-top: 10px;">
