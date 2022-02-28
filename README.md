@@ -6,7 +6,7 @@ This WordPress plugin is forked from [authorizer](https://wordpress.org/plugins/
 
 #### Custom user profile view (maapprofile.php)
 
-Also included in this project is a custom [MAAP profile view](maapprofile.php) that references a CAS proxy granting ticket. To use this custom view, add it in the `page-templates` folder of a WordPress theme, and then create a new WordPress page that references the template. ***Be sure to update the environment specific paths in this script to match the environment on which it is being deployed.***
+Also included in this project is a custom [MAAP profile view](maapprofile.php) that references a CAS proxy granting ticket. To use this custom view, add it in the `page-templates` folder of a WordPress theme, and then create a new WordPress page that references the template. 
 
 #### Enabling Sessions
 
