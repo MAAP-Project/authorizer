@@ -14,10 +14,9 @@
 
 <?php
 
-$proxyTicketEnc = $_SESSION['maap-profile-proxyGrantingTicket'];
 $proxyTicketDec = $_SESSION['phpCAS']['pgt'];
 
-$maap_api = 'api.dit.maap-project.org'; // Update during deployment
+$maap_api = 'api.' . str_replace("www.", "", $_SERVER['HTTP_HOST']);
 $maap_api_profile = 'https://'. $maap_api . '/api/members/self';
 $maap_api_sshKey = $maap_api_profile . '/sshKey';
 
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     
     $headers = array(
-        'proxy-ticket:' . $proxyTicketEnc,
+        'proxy-ticket:' . $proxyTicketDec,
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
