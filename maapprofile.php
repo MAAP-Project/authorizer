@@ -94,17 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // Create Status HTML
                             $status_html = '<div class="error-text"><i aria-hidden="true" data-hidden="true" class="fa fa-exclamation-circle icon-size-lg icon-margin-right"></i><strong>Unknown</strong></div><div>If you have questions about your account, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
 
-                            if( $_SESSION['maap-profile']['status'] == "suspended" ) {
+                            if( strtoupper($_SESSION['maap-profile']['status']) === "SUSPENDED" ) {
                                 $status_html = '<div class="error-text"><i aria-hidden="true" data-hidden="true" class="fa fa-exclamation-circle icon-size-lg icon-margin-right"></i><strong>Pending Activation</strong></div><div>If you have questions about your account’s activation, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
-                            } elseif ( $_SESSION['maap-profile']['status'] == "active" ) {
+                            } elseif ( strtoupper($_SESSION['maap-profile']['status']) === "ACTIVE" ) {
                                 $status_html = '<div class="success-text"><i aria-hidden="true" data-hidden="true" class="fa fa-check-circle icon-size-lg icon-margin-right"></i> <strong>Active</strong></div><div>If you have questions about your account, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
                             }
 
                             //Set Client Name
                             $client_name = "";
-                            if( strtoupper($_SESSION['maap-profile']['clientName']) == "MAAPAUTH" ) {
+                            if( strtoupper($_SESSION['maap-profile']['clientName']) === "MAAPAUTH" ) {
                                 $client_name = "EarthData (URS)";
-                            } elseif ( strtoupper($_SESSION['maap-profile']['clientName']) == "ESA" ) {
+                            } elseif ( strtoupper($_SESSION['maap-profile']['clientName']) === "ESA" ) {
                                 $client_name = "ESA (Gluu)";
                             }
 
@@ -135,14 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php
 
                                     $profile_url = "";
-                                    if( strtoupper($_SESSION['maap-profile']['clientName']) == "MAAPAUTH" ) {
+                                    if( strtoupper($_SESSION['maap-profile']['clientName']) === "MAAPAUTH" ) {
 
                                         $profile_url = "https://urs.earthdata.nasa.gov"; // UAT and OPS environment
                                         if( $_SERVER['SERVER_NAME'] == 'dit.maap-project.org' ) {
                                             $profile_url = "https://uat.urs.earthdata.nasa.gov"; // DIT environment
                                         }
 
-                                    } elseif ( strtoupper($_SESSION['maap-profile']['clientName']) == "ESA" ) {
+                                    } elseif ( strtoupper($_SESSION['maap-profile']['clientName']) === "ESA" ) {
 
                                         // Only one environment for ESA at the moment
                                         $profile_url = "https://iam.val.esa-maap.org";
