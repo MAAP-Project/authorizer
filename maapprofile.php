@@ -180,9 +180,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div><!-- .content-area -->
  
 <script>
-document.getElementById("file_upl").onchange = function() {
-    document.getElementById("file_up").submit();
-}
+
+    document.getElementById("file_upl").onchange = function() {
+        document.getElementById("file_up").submit();
+    }
 
 </script>
 
