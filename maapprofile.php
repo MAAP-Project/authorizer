@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     }
 
-                                    echo 'To update your MAAP profile, simply update your <a href="' . $profile_url . '">' . $client_name . ' Profile</a> and the next time you login to MAAP, your MAAP profile will be synchronized with your EarthData profile.';
+                                    echo 'To update your MAAP profile, simply update your <a href="' . $profile_url . '">' . $client_name . ' Profile</a> and the next time you login to MAAP, your MAAP profile will be synchronized with your ' . $client_name . ' profile.';
 
                                 ?>
 
