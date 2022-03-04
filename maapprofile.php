@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $status_html = '<div class="error-text"><i aria-hidden="true" data-hidden="true" class="fa fa-exclamation-circle icon-size-lg icon-margin-right"></i><strong>Unknown</strong></div><div>If you have questions about your account, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
 
                             if( $_SESSION['maap-profile']['status'] == "suspended" ) {
-                                $status_html = '<div class="error-text"><i aria-hidden="true" data-hidden="true" class="fa fa-exclamation-circle icon-size-lg icon-margin-right"></i><strong>Pending Activation</strong></div><div>Your account is pending activation. If you have questions about your account’s activation, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
+                                $status_html = '<div class="error-text"><i aria-hidden="true" data-hidden="true" class="fa fa-exclamation-circle icon-size-lg icon-margin-right"></i><strong>Pending Activation</strong></div><div>If you have questions about your account’s activation, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
                             } elseif ( $_SESSION['maap-profile']['status'] == "active" ) {
-                                $status_html = '<div class="success-text"><i aria-hidden="true" data-hidden="true" class="fa fa-check-circle icon-size-lg icon-margin-right"></i> <strong>Active</strong></div><div>Your account is active. If you have questions about your account, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
+                                $status_html = '<div class="success-text"><i aria-hidden="true" data-hidden="true" class="fa fa-check-circle icon-size-lg icon-margin-right"></i> <strong>Active</strong></div><div>If you have questions about your account, send an email to <a href="mailto:support@maap-project.org">support@maap-project.org</a>.</div>';
                             }
 
                             //Set Client Name
