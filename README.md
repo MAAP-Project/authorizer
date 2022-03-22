@@ -20,11 +20,16 @@ if (!session_id()) {
 
 ## Plugin Deployment
 
-To bundle the plugin for deployment to our WordPress instance, and if you are on an unix based machine, run the following command to create a ZIP file that can be used to install the plugin. This command reads the list of files specified in `authorizer.lst` and creates a ZIP file named `authorizer.zip`. The `-r` option ensures that the contents of folders specified in the `authorizer.lst` file are included in the ZIP.
+To bundle the plugin for deployment to our WordPress instance, and if you are on an unix based machine, run the following command to create a ZIP file that can be used to install the plugin. This command reads the list of files specified in `authorizer.lst` and creates a ZIP file named `authorizer.zip`. The `-r` option ensures that the contents of folders specified in the `authorizer.lst` file are included in the ZIP. Select a location on your filesystem to save this zip file as it shouldn't be committed.
+
+`version_number` should be the current version number of the authorizer plugin that we are using.
+`build_number` is an incremented value as we make changes to our forked copy of the authorizer plugin.
 
 ```
-zip -r authorizer.zip -x \*.DS_Store -@ < authorizer.lst
+zip -r ~/authorizer-v<version_number>-build_<build_number>.zip -x \*.DS_Store -@ < authorizer.lst
 ```
+
+Sample Filename: `authorizer-v2_9_12-build_1.zip`
 
 If you need to manually create the ZIP file, refer to the `authorizer.lst` file to know which files and folders should be compressed.
 
